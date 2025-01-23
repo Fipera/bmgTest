@@ -416,9 +416,46 @@ def simular_saque_parcelado_bmg(retorno_login,dict_infos):
 # }
 
 def digitacao_bmg(retorno_login, dict_infos):
+    login = 'ROBO.56306'
+    senha = r'irWY!kQD@6%rb'
+    
     retorno_consulta = consulta_saque_complementar_bmg(True, dict_infos)
+    return retorno_consulta
+    print(retorno_consulta)
 
-    return retorno_consulta    
+    soap = f'''<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:gravarPropostaSaqueComplementar soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+         <proposta xsi:type="web:SaqueComplementarParameter">
+            <login xsi:type="soapenc:string">{login}</login>
+            <senha xsi:type="soapenc:string">{senha}</senha>
+            <codigoEntidade xsi:type="xsd:int">{dict_infos["codigo_entidade"]}</codigoEntidade>
+            <cpf xsi:type="soapenc:string">{dict_infos["cpf"]}</cpf>
+            <matricula xsi:type="soapenc:string">{dict_infos["matricula"]}</matricula>
+            <numeroContaInterna xsi:type="xsd:long">{dict_infos["numero_conta_interna"]}</numeroContaInterna>
+            <tipoSaque xsi:type="xsd:int">{dict_infos["tipo_saque"]}</tipoSaque>
+            <agencia xsi:type="web:AgenciaParameter">
+               <digitoVerificador xsi:type="soapenc:string">{dict_infos["digito_agencia"]}</digitoVerificador>
+               <numero xsi:type="soapenc:string">{dict_infos["agencia"]}</numero>
+            </agencia>
+            <banco xsi:type="web:BancoParameter">
+               <numero xsi:type="xsd:int">{dict_infos["codigo_banco"]}</numero>
+            </banco>
+            <bancoOrdemPagamento xsi:type="xsd:int">{dict_infos["codigo_banco_ordem_pagamento"]}</bancoOrdemPagamento>
+            <codigoFormaEnvioTermo xsi:type="soapenc:string">{dict_infos["codigo_forma_envio_termo"]}</codigoFormaEnvioTermo>
+            <conta xsi:type="web:ContaParameter">
+               <digitoVerificador xsi:type="soapenc:string">{dict_infos["digito_conta"]}</digitoVerificador>
+               <numero xsi:type="soapenc:string">{dict_infos["conta"]}</numero>
+            </conta>
+            <cpfAgente xsi:type="soapenc:string">{dict_infos["cpf_digitador"]}</cpfAgente>
+            <finalidadeCredito xsi:type="xsd:int">{dict_infos["codigo_finalidade_credito"]}</finalidadeCredito>
+            <formaCredito xsi:type="xsd:int">{dict_infos["codigo_forma_credito"]}</formaCredito>
+            <valorSaque xsi:type="soapenc:double">{dict_infos["valor_saque"]}</valorSaque>
+         </proposta>
+      </web:gravarPropostaSaqueComplementar>
+   </soapenv:Body>
+</soapenv:Envelope>'''    
     url = " https://ws1.bmgconsig.com.br/webservices/CartaoBmgCard?wsdl"
 
 
@@ -434,7 +471,9 @@ def digitacao_bmg(retorno_login, dict_infos):
     print(response.content)
 
 dict_infos = {
-    "cpf": "19763379253",
+    "cpf": "33984905220",
+    "codigo_entidade" : "1581", # 1581 ou 4277
+    "matricula": "2",
 }
 
 retorno_digitacao = digitacao_bmg(True, dict_infos)
