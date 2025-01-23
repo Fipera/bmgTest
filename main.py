@@ -473,7 +473,7 @@ def digitacao_bmg(retorno_login, dict_infos):
     headers = {
         "Content-Type": "text/xml; charset=utf-8",
         "Content-Length": str(len(soap)),
-        "SOAPAction": "http://webservice.econsig.bmg.com/gravarPropostaSaqueComplementar",  # Replace with the appropriate SOAP action
+        "SOAPAction": "http://webservice.econsig.bmg.com/geraScript",  # Replace with the appropriate SOAP action
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
 
     }
