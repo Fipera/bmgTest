@@ -510,7 +510,7 @@ dict_infos = {
     "valor_parcela": 42.11,
     "valor_saque": 910.64,                            
     "ddd": "19",
-    "celular": "999999999"
+    "celular": "997998404"
 }
 
 # retorno_digitacao = digitacao_bmg(True, dict_infos)
