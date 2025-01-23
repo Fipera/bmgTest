@@ -477,7 +477,7 @@ def digitacao_bmg(retorno_login, dict_infos):
 dict_infos = {
     "cpf": "46128832253",
     "codigo_entidade" : "1581", # 1581 ou 4277
-    "matricula": "",
+    "matricula": "0474611299",
     "login_consig": "SC.56306.13865437990",
     "senha_consig": "Banco@2025",
     "numero_conta_interna": "4253628",
