@@ -516,7 +516,7 @@ dict_infos = {
 # retorno = consulta_saque_complementar_bmg(True,dict_infos)
 # print(retorno)
 
-retorno = digitacao_bmg_api(True,dict_infos)
+retorno = digitacao_bmg(True,dict_infos)
 print(retorno)
 # cpfs_df = pd.read_csv('cpfs.csv')
 # RETORNOS = {}
