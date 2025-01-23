@@ -419,6 +419,15 @@ def digitacao_bmg(retorno_login, dict_infos):
     login = 'ROBO.56306'
     senha = r'irWY!kQD@6%rb'
     
+    codigo_produto_seguro = 47 if dict_infos["codigo_entidade"] == '4277' else 1
+    info_seguro = ''
+    if dict_infos['codigo_seguro']:
+        info_seguro = f'''<seguros xsi:type="web:ArrayOfSeguro" soapenc:arrayType="web:Seguro[1]">
+<seguro>
+<tipoSeguro>{codigo_produto_seguro}</tipoSeguro>
+<codigoPlano xsi:type="xsd:int">{dict_infos['codigo_seguro']}</codigoPlano>
+</seguro>
+</seguros>'''
 
     soap = f'''<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
    <soapenv:Header/>
@@ -451,6 +460,7 @@ def digitacao_bmg(retorno_login, dict_infos):
             <finalidadeCredito xsi:type="xsd:int">{dict_infos["codigo_finalidade_credito"]}</finalidadeCredito>
             <formaCredito xsi:type="xsd:int">{dict_infos["codigo_forma_credito"]}</formaCredito>
             <numeroParcelas xsi:type="soapenc:int">{dict_infos["numero_parcelas"]}</numeroParcelas>
+            {info_seguro}
             <valorParcela xsi:type="soapenc:double">{dict_infos["valor_parcela"]}</valorParcela>
             <valorSaque xsi:type="soapenc:double">{dict_infos["valor_saque"]}</valorSaque>
          </proposta>
@@ -489,7 +499,7 @@ dict_infos = {
     "codigo_forma_envio_termo" : "12", # Balcao(0)    Email(1)    Sedex(2)    GetNet(3)   MotoBoy(4)  EntregaPessoal(5)   CartaoBMGFacilInternet(6)
                                      # CartaoBMGFacilInternetSenhaValidada(7)    DocumentoDigital(8)     Gravacao(9)     InternetBanking(11)     Mobile(12)
     "digito_conta" : "1",
-    "conta": "705239",
+    "conta": "7052391",
     "cpf_digitador": "43695106867",
     "codigo_finalidade_credito": 2, # 1 - Conta Movimento   2- Conta Poupança
     "codigo_forma_credito": 2, # TedContaSalario(1)    TedContaCredito(2)  OrdemPagamento(3)   AgenciaPagadoraBMG(4)   SemFinanceiro(5)    CartaoBMBCash(6)    
