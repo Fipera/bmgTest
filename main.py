@@ -419,8 +419,6 @@ def digitacao_bmg(retorno_login, dict_infos):
     login = 'ROBO.56306'
     senha = r'irWY!kQD@6%rb'
     
-    retorno_consulta = consulta_saque_complementar_bmg(True, dict_infos)
-    print(retorno_consulta)
 
     soap = f'''<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
    <soapenv:Header/>
@@ -452,6 +450,8 @@ def digitacao_bmg(retorno_login, dict_infos):
             <cpfAgente xsi:type="soapenc:string">{dict_infos["cpf_digitador"]}</cpfAgente>
             <finalidadeCredito xsi:type="xsd:int">{dict_infos["codigo_finalidade_credito"]}</finalidadeCredito>
             <formaCredito xsi:type="xsd:int">{dict_infos["codigo_forma_credito"]}</formaCredito>
+            <numeroParcelas xsi:type="soapenc:int">{dict_infos["numero_parcelas"]}</numeroParcelas>
+            <valorParcela xsi:type="soapenc:double">{dict_infos["valor_parcela"]}</valorParcela>
             <valorSaque xsi:type="soapenc:double">{dict_infos["valor_saque"]}</valorSaque>
          </proposta>
       </web:gravarPropostaSaqueComplementar>
@@ -494,7 +494,9 @@ dict_infos = {
     "codigo_finalidade_credito": 2, # 1 - Conta Movimento   2- Conta Poupança
     "codigo_forma_credito": 2, # TedContaSalario(1)    TedContaCredito(2)  OrdemPagamento(3)   AgenciaPagadoraBMG(4)   SemFinanceiro(5)    CartaoBMBCash(6)    
                                 # Opcional(7)   BMGCheque(8)   CartaoDinheiroRapido(9)     ChequeAdministrativo(12)    SaqueTecban(14)     SaqueOpAtm(15)
-    "valor_saque": 900,                            
+    "numero_parcelas": 84,
+    "valor_parcela": 42.11,
+    "valor_saque": 1433.00,                            
     
 }
 
