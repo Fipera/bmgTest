@@ -432,7 +432,7 @@ def simular_saque_parcelado_bmg(retorno_login,dict_infos):
 #     print(response.content)
 
 dict_infos = {
-    "cpf": "14581035104",
+    "cpf": "39015335249",
 }
 
 retorno_consulta = consulta_saque_complementar_bmg(True, dict_infos)
