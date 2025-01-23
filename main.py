@@ -419,15 +419,6 @@ def digitacao_bmg(retorno_login, dict_infos):
     login = 'ROBO.56306'
     senha = r'irWY!kQD@6%rb'
     
-    codigo_produto_seguro = 47 if dict_infos["codigo_entidade"] == '4277' else 1
-    info_seguro = ''
-    if dict_infos['codigo_seguro']:
-        info_seguro = f'''<seguros xsi:type="web:ArrayOfSeguro" soapenc:arrayType="web:Seguro[1]">
-<seguro>
-<tipoSeguro>{codigo_produto_seguro}</tipoSeguro>
-<codigoPlano xsi:type="xsd:int">{dict_infos['codigo_seguro']}</codigoPlano>
-</seguro>
-</seguros>'''
 
     soap = f'''<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
    <soapenv:Header/>
@@ -460,7 +451,6 @@ def digitacao_bmg(retorno_login, dict_infos):
             <finalidadeCredito xsi:type="xsd:int">{dict_infos["codigo_finalidade_credito"]}</finalidadeCredito>
             <formaCredito xsi:type="xsd:int">{dict_infos["codigo_forma_credito"]}</formaCredito>
             <numeroParcelas xsi:type="soapenc:int">{dict_infos["numero_parcelas"]}</numeroParcelas>
-            {info_seguro}
             <valorParcela xsi:type="soapenc:double">{dict_infos["valor_parcela"]}</valorParcela>
             <valorSaque xsi:type="soapenc:double">{dict_infos["valor_saque"]}</valorSaque>
          </proposta>
@@ -507,7 +497,7 @@ dict_infos = {
     "numero_parcelas": 84,
     "valor_parcela": 42.11,
     "valor_saque": 1433.00,                            
-    'codigo_seguro':'76',
+    
 }
 
 retorno_digitacao = digitacao_bmg(True, dict_infos)
