@@ -51,7 +51,6 @@ def consulta_saque_complementar_bmg(retorno_login,dict_infos):
  
         response = requests.post(url, data=soap_envelope, headers=headers)
         soap_response_content = response.content
-        print(soap_response_content)
             # Parse the SOAP response content
         root = ET.fromstring(soap_response_content)
         # Find the faultcode and faultstring
@@ -416,27 +415,30 @@ def simular_saque_parcelado_bmg(retorno_login,dict_infos):
 #     'codigo_seguro':'76'
 # }
 
-# def digitacao_bmg(retorno_login, dict_infos):
-#     url = " https://ws1.bmgconsig.com.br/webservices/CartaoBmgCard?wsdl"
+def digitacao_bmg(retorno_login, dict_infos):
+    retorno_consulta = consulta_saque_complementar_bmg(True, dict_infos)
+
+    return retorno_consulta    
+    url = " https://ws1.bmgconsig.com.br/webservices/CartaoBmgCard?wsdl"
 
 
-#     headers = {
-#         "Content-Type": "text/xml; charset=utf-8",
-#         "Content-Length": str(len(soap)),
-#         "SOAPAction": "http://webservice.econsig.bmg.com/gravarPropostaCartao",  # Replace with the appropriate SOAP action
-#         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
+    headers = {
+        "Content-Type": "text/xml; charset=utf-8",
+        "Content-Length": str(len(soap)),
+        "SOAPAction": "http://webservice.econsig.bmg.com/gravarPropostaCartao",  # Replace with the appropriate SOAP action
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
 
-#     }
+    }
 
-#     response = requests.post(url, data=soap, headers=headers)
-#     print(response.content)
+    response = requests.post(url, data=soap, headers=headers)
+    print(response.content)
 
 dict_infos = {
-    "cpf": "39015335249",
+    "cpf": "19763379253",
 }
 
-retorno_consulta = consulta_saque_complementar_bmg(True, dict_infos)
-print(retorno_consulta)
+retorno_digitacao = digitacao_bmg(True, dict_infos)
+print(retorno_digitacao)
 
 # retorno = simular_saque_parcelado_bmg(True,dict_infos)
 # retorno_digitacao = digitacao_bmg(True, dict_infos_2)
