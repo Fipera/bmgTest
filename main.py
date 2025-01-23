@@ -9,8 +9,8 @@ dict_modalidade_saque = {
 
 
 def consulta_saque_complementar_bmg(retorno_login,dict_infos):
-    login = 'robo.43690'
-    senha = '89bf417$'
+    login = 'ROBO.56306'
+    senha = r'irWY!kQD@6%rb'
     if dict_infos.get("id_consulta_massa") and not dict_infos.get('leads_saque'):
         print('aguardando consulta em massa BMG')
         time.sleep(randint(10,30))
