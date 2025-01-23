@@ -503,7 +503,7 @@ dict_infos = {
                                 # Opcional(7)   BMGCheque(8)   CartaoDinheiroRapido(9)     ChequeAdministrativo(12)    SaqueTecban(14)     SaqueOpAtm(15)
     "numero_parcelas": 84,
     "valor_parcela": 42.11,
-    "valor_saque": 1433.00,                            
+    "valor_saque": 910.60,                            
     
 }
 
