@@ -471,7 +471,7 @@ def digitacao_bmg(retorno_login, dict_infos):
     print(response.content)
 
 dict_infos = {
-    "cpf": "33984905220",
+    "cpf": "46128832253",
     # "codigo_entidade" : "1581", # 1581 ou 4277
     # "matricula": "2",
 }
