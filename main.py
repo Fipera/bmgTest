@@ -493,7 +493,7 @@ dict_infos = {
     "agencia" : "1060",
     "codigo_banco" : 237,
     "codigo_banco_ordem_pagamento" : 0, #Informar ‘0’ (zero)caso não seja OP.
-    "codigo_forma_envio_termo" : "12", # Balcao(0)    Email(1)    Sedex(2)    GetNet(3)   MotoBoy(4)  EntregaPessoal(5)   CartaoBMGFacilInternet(6)
+    "codigo_forma_envio_termo" : "15", # Balcao(0)    Email(1)    Sedex(2)    GetNet(3)   MotoBoy(4)  EntregaPessoal(5)   CartaoBMGFacilInternet(6)
                                      # CartaoBMGFacilInternetSenhaValidada(7)    DocumentoDigital(8)     Gravacao(9)     InternetBanking(11)     Mobile(12)
     "digito_conta" : "1",
     "conta": "7052391",
@@ -503,7 +503,7 @@ dict_infos = {
                                 # Opcional(7)   BMGCheque(8)   CartaoDinheiroRapido(9)     ChequeAdministrativo(12)    SaqueTecban(14)     SaqueOpAtm(15)
     "numero_parcelas": 84,
     "valor_parcela": 42.11,
-    "valor_saque": 910.60,                            
+    "valor_saque": 910.64,                            
     
 }
 
