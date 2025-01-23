@@ -460,11 +460,7 @@ def digitacao_bmg(retorno_login, dict_infos):
             <numeroParcelas xsi:type="soapenc:int">{dict_infos["numero_parcelas"]}</numeroParcelas>
             <valorParcela xsi:type="soapenc:double">{dict_infos["valor_parcela"]}</valorParcela>
             <valorSaque xsi:type="soapenc:double">{dict_infos["valor_saque"]}</valorSaque>
-            <celular1 xsi:type="web:TelefoneParameter">
-               <ddd xsi:type="soapenc:string">{dict_infos["ddd"]}</ddd>
-               <numero xsi:type="soapenc:string">{dict_infos["celular"]}</numero>
-               <ramal xsi:type="soapenc:string"></ramal>
-            </celular1>
+            
          </proposta>
       </web:gravarPropostaSaqueComplementar>
    </soapenv:Body>
@@ -509,8 +505,7 @@ dict_infos = {
     "numero_parcelas": 84,
     "valor_parcela": 42.11,
     "valor_saque": 910.64,                            
-    "ddd": "19",
-    "celular": "997998404"
+    
 }
 
 # retorno_digitacao = digitacao_bmg(True, dict_infos)
