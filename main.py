@@ -432,6 +432,8 @@ def digitacao_bmg(retorno_login, dict_infos):
             <codigoEntidade xsi:type="xsd:int">{dict_infos["codigo_entidade"]}</codigoEntidade>
             <cpf xsi:type="soapenc:string">{dict_infos["cpf"]}</cpf>
             <matricula xsi:type="soapenc:string">{dict_infos["matricula"]}</matricula>
+            <loginConsig xsi:type="soapenc:string">{dict_infos["login_consig"]}</loginConsig>
+            <senhaConsig xsi:type="soapenc:string">{dict_infos["senha_consig"]}</senhaConsig>
             <numeroContaInterna xsi:type="xsd:long">{dict_infos["numero_conta_interna"]}</numeroContaInterna>
             <tipoSaque xsi:type="xsd:int">{dict_infos["tipo_saque"]}</tipoSaque>
             <agencia xsi:type="web:AgenciaParameter">
@@ -476,6 +478,8 @@ dict_infos = {
     "cpf": "46128832253",
     "codigo_entidade" : "1581", # 1581 ou 4277
     "matricula": "",
+    "login_consig": "SC.56306.07039312964",
+    "senha_consig": "Consig@2024",
     "numero_conta_interna": "4253628",
     "tipo_saque": 2,    #   1-SaqueAutorizado    2-SaqueAutorizadoParcelado    3-SaqueAutorizadoLojista     4-SaqueAutorizadoParceladoLojista     5-SaqueAutorizadoDecimoTerceiro
     "digito_agencia" : 1,
