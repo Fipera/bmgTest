@@ -507,7 +507,7 @@ dict_infos = {
     "numero_parcelas": 84,
     "valor_parcela": 42.11,
     "valor_saque": 1433.00,                            
-    
+    'codigo_seguro':'76',
 }
 
 retorno_digitacao = digitacao_bmg(True, dict_infos)
