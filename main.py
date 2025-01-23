@@ -426,7 +426,7 @@ def digitacao_bmg(retorno_login, dict_infos):
     senha = r'irWY!kQD@6%rb'
     dict_consulta = {"cpf": "46128832253"}
     consulta = consulta_saque_complementar_bmg(retorno_login, dict_consulta)
-
+    print(f" CONSULTA : {consulta.content}")
     soap = f'''<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
    <soapenv:Header/>
    <soapenv:Body>
