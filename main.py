@@ -289,6 +289,9 @@ def login_api_bmg(usuario_id,nome_thread):
 def digitacao_bmg_api(retorno_login,dict_infos):
     simulacao = simular_saque_parcelado_bmg(retorno_login,dict_infos)
     
+    login = 'ROBO.56306'
+    senha = r'irWY!kQD@6%rb'
+    
     url = "https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl"
     codigo_produto_seguro = 47 if dict_infos["codigo_entidade"] == '4277' else 1
     info_seguro = ''
@@ -500,8 +503,8 @@ dict_infos = {
     
 }
 
-retorno_digitacao = digitacao_bmg(True, dict_infos)
-print(f"Retorno digitação:{retorno_digitacao}")
+# retorno_digitacao = digitacao_bmg(True, dict_infos)
+# print(f"Retorno digitação:{retorno_digitacao}")
 
 # retorno = simular_saque_parcelado_bmg(True,dict_infos)
 # retorno_digitacao = digitacao_bmg(True, dict_infos_2)
@@ -510,8 +513,8 @@ print(f"Retorno digitação:{retorno_digitacao}")
 # retorno = consulta_saque_complementar_bmg(True,dict_infos)
 # print(retorno)
 
-# retorno = digitacao_bmg_api(True,dict_infos)3
-# print(retorno)
+retorno = digitacao_bmg_api(True,dict_infos)
+print(retorno)
 # cpfs_df = pd.read_csv('cpfs.csv')
 # RETORNOS = {}
 # for index,row in cpfs_df.iterrows():
