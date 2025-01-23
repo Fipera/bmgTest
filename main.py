@@ -476,20 +476,20 @@ def digitacao_bmg(retorno_login, dict_infos):
 
 dict_infos = {
     "cpf": "46128832253",
-    "codigo_entidade" : "1581", # 1581 ou 4277
+    "codigo_entidade" : 1581, # 1581 ou 4277
     "matricula": "0474611299",
     "login_consig": "SC.56306.13865437990",
     "senha_consig": "Banco@2025",
-    "numero_conta_interna": "4253628",
+    "numero_conta_interna": 4253628,
     "tipo_saque": 2,    #   1-SaqueAutorizado    2-SaqueAutorizadoParcelado    3-SaqueAutorizadoLojista     4-SaqueAutorizadoParceladoLojista     5-SaqueAutorizadoDecimoTerceiro
-    "digito_agencia" : 0,
-    "agencia" : "0001",
-    "codigo_banco" : 260,
+    "digito_agencia" : "0",
+    "agencia" : "1060",
+    "codigo_banco" : 237,
     "codigo_banco_ordem_pagamento" : 0, #Informar ‘0’ (zero)caso não seja OP.
-    "codigo_forma_envio_termo" : 12, # Balcao(0)    Email(1)    Sedex(2)    GetNet(3)   MotoBoy(4)  EntregaPessoal(5)   CartaoBMGFacilInternet(6)
+    "codigo_forma_envio_termo" : "12", # Balcao(0)    Email(1)    Sedex(2)    GetNet(3)   MotoBoy(4)  EntregaPessoal(5)   CartaoBMGFacilInternet(6)
                                      # CartaoBMGFacilInternetSenhaValidada(7)    DocumentoDigital(8)     Gravacao(9)     InternetBanking(11)     Mobile(12)
-    "digito_conta" : 1,
-    "conta": 123456789,
+    "digito_conta" : "1",
+    "conta": "123456789",
     "cpf_digitador": "43695106867",
     "codigo_finalidade_credito": 2, # 1 - Conta Movimento   2- Conta Poupança
     "codigo_forma_credito": 2, # TedContaSalario(1)    TedContaCredito(2)  OrdemPagamento(3)   AgenciaPagadoraBMG(4)   SemFinanceiro(5)    CartaoBMBCash(6)    
