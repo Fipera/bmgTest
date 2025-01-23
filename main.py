@@ -420,7 +420,6 @@ def digitacao_bmg(retorno_login, dict_infos):
     senha = r'irWY!kQD@6%rb'
     
     retorno_consulta = consulta_saque_complementar_bmg(True, dict_infos)
-    return retorno_consulta
     print(retorno_consulta)
 
     soap = f'''<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
@@ -455,29 +454,48 @@ def digitacao_bmg(retorno_login, dict_infos):
          </proposta>
       </web:gravarPropostaSaqueComplementar>
    </soapenv:Body>
-</soapenv:Envelope>'''    
-    url = " https://ws1.bmgconsig.com.br/webservices/CartaoBmgCard?wsdl"
+</soapenv:Envelope>'''  
+
+  
+    url = "https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl"
 
 
     headers = {
         "Content-Type": "text/xml; charset=utf-8",
         "Content-Length": str(len(soap)),
-        "SOAPAction": "http://webservice.econsig.bmg.com/gravarPropostaCartao",  # Replace with the appropriate SOAP action
+        "SOAPAction": "http://webservice.econsig.bmg.com/gravarPropostaSaqueComplementar",  # Replace with the appropriate SOAP action
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
 
     }
 
     response = requests.post(url, data=soap, headers=headers)
+    print("RESPOSTA:")
     print(response.content)
 
 dict_infos = {
     "cpf": "46128832253",
-    # "codigo_entidade" : "1581", # 1581 ou 4277
-    # "matricula": "2",
+    "codigo_entidade" : "1581", # 1581 ou 4277
+    "matricula": "",
+    "numero_conta_interna": "4253628",
+    "tipo_saque": 2,    #   1-SaqueAutorizado    2-SaqueAutorizadoParcelado    3-SaqueAutorizadoLojista     4-SaqueAutorizadoParceladoLojista     5-SaqueAutorizadoDecimoTerceiro
+    "digito_agencia" : 1,
+    "agencia" : "0001",
+    "codigo_banco" : 260,
+    "codigo_banco_ordem_pagamento" : 0, #Informar ‘0’ (zero)caso não seja OP.
+    "codigo_forma_envio_termo" : 12, # Balcao(0)    Email(1)    Sedex(2)    GetNet(3)   MotoBoy(4)  EntregaPessoal(5)   CartaoBMGFacilInternet(6)
+                                     # CartaoBMGFacilInternetSenhaValidada(7)    DocumentoDigital(8)     Gravacao(9)     InternetBanking(11)     Mobile(12)
+    "digito_conta" : 1,
+    "conta": 1,
+    "cpf_digitador": "43695106867",
+    "codigo_finalidade_credito": 2, # 1 - Conta Movimento   2- Conta Poupança
+    "codigo_forma_credito": 2, # TedContaSalario(1)    TedContaCredito(2)  OrdemPagamento(3)   AgenciaPagadoraBMG(4)   SemFinanceiro(5)    CartaoBMBCash(6)    
+                                # Opcional(7)   BMGCheque(8)   CartaoDinheiroRapido(9)     ChequeAdministrativo(12)    SaqueTecban(14)     SaqueOpAtm(15)
+    "valor_saque": 900,                            
+    
 }
 
 retorno_digitacao = digitacao_bmg(True, dict_infos)
-print(retorno_digitacao)
+print(f"Retorno digitação:{retorno_digitacao}")
 
 # retorno = simular_saque_parcelado_bmg(True,dict_infos)
 # retorno_digitacao = digitacao_bmg(True, dict_infos_2)
