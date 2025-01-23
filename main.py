@@ -424,7 +424,8 @@ def simular_saque_parcelado_bmg(retorno_login,dict_infos):
 def digitacao_bmg(retorno_login, dict_infos):
     login = 'ROBO.56306'
     senha = r'irWY!kQD@6%rb'
-    
+    dict_consulta = {"cpf": "46128832253"}
+    consulta = consulta_saque_complementar_bmg(retorno_login, dict_consulta)
 
     soap = f'''<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
    <soapenv:Header/>
@@ -487,7 +488,7 @@ dict_infos = {
     "login_consig": "SC.56306.13865437990",
     "senha_consig": "Banco@2025",
     "numero_conta_interna": 4253628,
-    "tipo_saque": 1,    #   1-SaqueAutorizado    2-SaqueAutorizadoParcelado    3-SaqueAutorizadoLojista     4-SaqueAutorizadoParceladoLojista     5-SaqueAutorizadoDecimoTerceiro
+    "tipo_saque": 2,    #   1-SaqueAutorizado    2-SaqueAutorizadoParcelado    3-SaqueAutorizadoLojista     4-SaqueAutorizadoParceladoLojista     5-SaqueAutorizadoDecimoTerceiro
     "digito_agencia" : "0",
     "agencia" : "1060",
     "codigo_banco" : 237,
