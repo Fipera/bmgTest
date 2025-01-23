@@ -487,7 +487,7 @@ dict_infos = {
     "login_consig": "SC.56306.13865437990",
     "senha_consig": "Banco@2025",
     "numero_conta_interna": 4253628,
-    "tipo_saque": 2,    #   1-SaqueAutorizado    2-SaqueAutorizadoParcelado    3-SaqueAutorizadoLojista     4-SaqueAutorizadoParceladoLojista     5-SaqueAutorizadoDecimoTerceiro
+    "tipo_saque": 1,    #   1-SaqueAutorizado    2-SaqueAutorizadoParcelado    3-SaqueAutorizadoLojista     4-SaqueAutorizadoParceladoLojista     5-SaqueAutorizadoDecimoTerceiro
     "digito_agencia" : "0",
     "agencia" : "1060",
     "codigo_banco" : 237,
