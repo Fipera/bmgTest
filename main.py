@@ -460,6 +460,11 @@ def digitacao_bmg(retorno_login, dict_infos):
             <numeroParcelas xsi:type="soapenc:int">{dict_infos["numero_parcelas"]}</numeroParcelas>
             <valorParcela xsi:type="soapenc:double">{dict_infos["valor_parcela"]}</valorParcela>
             <valorSaque xsi:type="soapenc:double">{dict_infos["valor_saque"]}</valorSaque>
+            <celular1 xsi:type="web:TelefoneParameter">
+               <ddd xsi:type="soapenc:string">{dict_infos["ddd"]}</ddd>
+               <numero xsi:type="soapenc:string">{dict_infos["celular"]}</numero>
+               <ramal xsi:type="soapenc:string"></ramal>
+            </celular1>
          </proposta>
       </web:gravarPropostaSaqueComplementar>
    </soapenv:Body>
@@ -493,7 +498,7 @@ dict_infos = {
     "agencia" : "1060",
     "codigo_banco" : 237,
     "codigo_banco_ordem_pagamento" : 0, #Informar ‘0’ (zero)caso não seja OP.
-    "codigo_forma_envio_termo" : "11", # Balcao(0)    Email(1)    Sedex(2)    GetNet(3)   MotoBoy(4)  EntregaPessoal(5)   CartaoBMGFacilInternet(6)
+    "codigo_forma_envio_termo" : "15", # Balcao(0)    Email(1)    Sedex(2)    GetNet(3)   MotoBoy(4)  EntregaPessoal(5)   CartaoBMGFacilInternet(6)
                                      # CartaoBMGFacilInternetSenhaValidada(7)    DocumentoDigital(8)     Gravacao(9)     InternetBanking(11)     Mobile(12)
     "digito_conta" : "1",
     "conta": "7052391",
@@ -504,7 +509,8 @@ dict_infos = {
     "numero_parcelas": 84,
     "valor_parcela": 42.11,
     "valor_saque": 910.64,                            
-    
+    "ddd": "19",
+    "celular": "999999999"
 }
 
 # retorno_digitacao = digitacao_bmg(True, dict_infos)
