@@ -611,7 +611,7 @@ dict_infos = {
     "conta": "7052391",
     "codigo_finalidade_credito": 1, #1="Conta corrente"     2="Conta poupança"      3= “Conta BMG”
     "codigo_forma_credito": 2, # Código da Forma de crédito:Transferência Bancária [2]          Conta BMG [18] (Quando for utilizada estaforma de crédito, o tipo de finalidade tem queser sempre a 3 “Conta BMG”).
-    "valor_saque": 910.64,                        
+    "valor_saque": 397.72,                        
     "ddd": "19",
     "celular": "997998403",
     "codigo_seguro": "",
