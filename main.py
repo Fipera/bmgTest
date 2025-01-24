@@ -463,7 +463,6 @@ def digitacao_bmg(retorno_login, dict_infos):
             ['buscarLimiteSaqueReturn']['valorSaqueMinimo']['#text']
         )
         
-        print(valor_saque_minimo)
         
         if dict_infos['valor_saque'] and dict_infos['valor_saque'] <= valor_saque_maximo and dict_infos['valor_saque'] >= valor_saque_minimo:
             dict_infos['valor_saque'] = dict_infos['valor_saque']
@@ -471,8 +470,7 @@ def digitacao_bmg(retorno_login, dict_infos):
             dict_infos['valor_saque'] = valor_saque_maximo
     except KeyError:
         dict_infos['valor_saque'] = None 
-    
-    print(dict_infos['valor_saque'])
+
     
   
 
@@ -522,6 +520,7 @@ def digitacao_bmg(retorno_login, dict_infos):
             <senha xsi:type="soapenc:string">{senha}</senha>
             <loginConsig xsi:type="soapenc:string">{dict_infos["login_consig"]}</loginConsig>
             <senhaConsig xsi:type="soapenc:string">{dict_infos["senha_consig"]}</senhaConsig>
+            <cpfImpedidoComissionar xsi:type="xsd:boolean">{False}</cpfImpedidoComissionar>
             <codigoEntidade xsi:type="xsd:int">{dict_infos["codigo_entidade"]}</codigoEntidade>
             <cpf xsi:type="soapenc:string">{dict_infos["cpf"]}</cpf>
             <matricula xsi:type="soapenc:string">{dict_infos["matricula"]}</matricula>
@@ -531,6 +530,7 @@ def digitacao_bmg(retorno_login, dict_infos):
                <digitoVerificador xsi:type="soapenc:string">{dict_infos["digito_agencia"]}</digitoVerificador>
                <numero xsi:type="soapenc:string">{dict_infos["agencia"]}</numero>
             </agencia>
+            <aberturaContaPagamento xsi:type="xsd:int">{0}</aberturaContaPagamento>
             <banco xsi:type="web:BancoParameter">
                <numero xsi:type="xsd:int">{dict_infos["codigo_banco"]}</numero>
             </banco>
@@ -546,6 +546,7 @@ def digitacao_bmg(retorno_login, dict_infos):
             <valorParcela xsi:type="soapenc:double">{dict_infos["valor_parcela"]}</valorParcela>
             <valorSaque xsi:type="soapenc:double">{dict_infos["valor_saque"]}</valorSaque>
             <codigoLoja xsi:type="xsd:int">{dict_infos["codigo_loja"]}</codigoLoja>
+            <email xsi:type="soapenc:string">{"nome.nome@gmail.com"}</email>
             <celular1 xsi:type="web:TelefoneParameter">
                <ddd xsi:type="soapenc:string">{dict_infos["ddd"]}</ddd>
                <numero xsi:type="soapenc:string">{dict_infos["celular"]}</numero>
