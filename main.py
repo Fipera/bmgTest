@@ -458,7 +458,17 @@ def digitacao_bmg(retorno_login, dict_infos):
             response_dict['soapenv:Envelope']['soapenv:Body']['ns1:buscarLimiteSaqueResponse']
             ['buscarLimiteSaqueReturn']['valorSaqueMaximo']['#text']
         )
-        dict_infos['valor_saque'] = valor_saque_maximo
+        valor_saque_minimo = float(
+            response_dict['soapenv:Envelope']['soapenv:Body']['ns1:buscarLimiteSaqueResponse']
+            ['buscarLimiteSaqueReturn']['valorSaqueMinimo']['#text']
+        )
+        
+        print(valor_saque_minimo)
+        
+        if dict_infos['valor_saque'] and dict_infos['valor_saque'] <= valor_saque_maximo and dict_infos['valor_saque'] >= valor_saque_minimo:
+            dict_infos['valor_saque'] = dict_infos['valor_saque']
+        else:
+            dict_infos['valor_saque'] = valor_saque_maximo
     except KeyError:
         dict_infos['valor_saque'] = None 
     
@@ -495,17 +505,12 @@ def digitacao_bmg(retorno_login, dict_infos):
         numero_parcelas = int(simulacao_return['numeroParcelas']['#text'])
         valor_parcela = float(simulacao_return['valorParcela']['#text'])
 
-        # Adicionando ao dicionário
+       
         dict_infos['numero_parcelas'] = numero_parcelas
         dict_infos['valor_parcela'] = valor_parcela
     except KeyError as e:
         dict_infos['numero_parcelas'] = None 
         dict_infos['valor_parcela'] = None 
-   
-   
-    print(dict_infos['numero_parcelas'])
-    print(dict_infos['valor_parcela'])
-    return response
    
    
     soap = f'''<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
@@ -583,7 +588,8 @@ dict_infos = {
     "conta": "7052391",
     "codigo_finalidade_credito": 1, #1="Conta corrente"     2="Conta poupança"      3= “Conta BMG”
     "codigo_forma_credito": 2, # Código da Forma de crédito:Transferência Bancária [2]          Conta BMG [18] (Quando for utilizada estaforma de crédito, o tipo de finalidade tem queser sempre a 3 “Conta BMG”).
-    "codigo_loja": 56306,                        
+    "codigo_loja": 56306,
+    "valor_saque": 910.64,                        
     "ddd": "19",
     "celular": "997998403"
 }
