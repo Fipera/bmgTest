@@ -521,7 +521,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def login_api_bmg(usuario_id,nome_thread):\n    return {'driver':True,'senha_valida':True}\ndef digitacao_bmg_api(retorno_login,dict_infos):\n    simulacao = simular_saque_parcelado_bmg(retorno_login,dict_infos)\n    print(simulacao)\n    login = 'ROBO.56306'\n    senha = r'irWY!kQD@6%rb'\n    url = \"https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl\"\n    codigo_produto_seguro = 47 if dict_infos[\"codigo_entidade\"] == '4277' else 1\n    info_seguro = ''",
+        "peekOfCode": "def login_api_bmg(usuario_id,nome_thread):\n    return {'driver':True,'senha_valida':True}\ndef digitacao_bmg_api(retorno_login,dict_infos):\n    dict_infos[\"cpf\"] = ''.join(re.findall(r'\\d+', dict_infos[\"cpf\"]))\n    dict_infos[\"cpf\"] = dict_infos[\"cpf\"].zfill(11)\n    simulacao = simular_saque_parcelado_bmg(retorno_login,dict_infos)\n    print(simulacao)\n    login = 'ROBO.56306'\n    senha = r'irWY!kQD@6%rb'\n    url = \"https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl\"",
         "detail": "main",
         "documentation": {}
     },
@@ -530,7 +530,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def digitacao_bmg_api(retorno_login,dict_infos):\n    simulacao = simular_saque_parcelado_bmg(retorno_login,dict_infos)\n    print(simulacao)\n    login = 'ROBO.56306'\n    senha = r'irWY!kQD@6%rb'\n    url = \"https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl\"\n    codigo_produto_seguro = 47 if dict_infos[\"codigo_entidade\"] == '4277' else 1\n    info_seguro = ''\n    if dict_infos['codigo_seguro']:\n        info_seguro = f'''<seguros xsi:type=\"web:ArrayOfSeguro\" soapenc:arrayType=\"web:Seguro[1]\">",
+        "peekOfCode": "def digitacao_bmg_api(retorno_login,dict_infos):\n    dict_infos[\"cpf\"] = ''.join(re.findall(r'\\d+', dict_infos[\"cpf\"]))\n    dict_infos[\"cpf\"] = dict_infos[\"cpf\"].zfill(11)\n    simulacao = simular_saque_parcelado_bmg(retorno_login,dict_infos)\n    print(simulacao)\n    login = 'ROBO.56306'\n    senha = r'irWY!kQD@6%rb'\n    url = \"https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl\"\n    codigo_produto_seguro = 47 if dict_infos[\"codigo_entidade\"] == '4277' else 1\n    info_seguro = ''",
         "detail": "main",
         "documentation": {}
     },

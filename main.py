@@ -287,6 +287,8 @@ def login_api_bmg(usuario_id,nome_thread):
     return {'driver':True,'senha_valida':True}
 
 def digitacao_bmg_api(retorno_login,dict_infos):
+    dict_infos["cpf"] = ''.join(re.findall(r'\d+', dict_infos["cpf"]))
+    dict_infos["cpf"] = dict_infos["cpf"].zfill(11)
     simulacao = simular_saque_parcelado_bmg(retorno_login,dict_infos)
     print(simulacao)
     login = 'ROBO.56306'
