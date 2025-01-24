@@ -294,6 +294,8 @@ def digitacao_bmg_api(retorno_login,dict_infos):
     print(simulacao)
     login = os.getenv("LOGIN")
     senha = os.getenv("SENHA")
+    print(login)
+    print(senha)
     
     url = "https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl"
     codigo_produto_seguro = 47 if dict_infos["codigo_entidade"] == '4277' else 1
