@@ -330,7 +330,6 @@ def digitacao_bmg_api(retorno_login,dict_infos):
                <digitoVerificador xsi:type="soapenc:string">{dict_infos["digito_conta"]}</digitoVerificador>
                <numero xsi:type="soapenc:string">{dict_infos["conta"]}</numero>
             </conta>
-            <cpfAgente xsi:type="soapenc:string">{dict_infos["cpf_digitador"]}</cpfAgente>
             <finalidadeCredito xsi:type="xsd:int">{dict_infos["codigo_finalidade_credito"]}</finalidadeCredito>
             <formaCredito xsi:type="xsd:int">{dict_infos["codigo_forma_credito"]}</formaCredito>
             <numeroParcelas xsi:type="soapenc:int">{dict_infos["numero_parcelas"]}</numeroParcelas>
