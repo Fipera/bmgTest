@@ -566,7 +566,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "dict_infos = {\n    \"cpf\": \"46128832253\",\n    \"codigo_entidade\" : 1581, # 1581 ou 4277\n    \"matricula\": \"0474611299\",\n    \"login_consig\": \"SC.56306.13865437990\",\n    \"senha_consig\": \"Banco@2025\",\n    \"numero_conta_interna\": 4253628,\n    \"tipo_saque\": 2,    #   1-SaqueAutorizado    2-Parcelado \n    \"digito_agencia\" : \"0\",\n    \"agencia\" : \"1060\",",
+        "peekOfCode": "dict_infos = {\n    \"cpf\": \"46128832253\",\n    \"codigo_entidade\" : 1581, # 1581 ou 4277\n    \"matricula\": \"0474611299\",\n    \"numero_conta_interna\": 4253628,\n    \"tipo_saque\": 2,    #   1-SaqueAutorizado    2-Parcelado \n    \"digito_agencia\" : \"0\",\n    \"agencia\" : \"1060\",\n    \"codigo_banco\" : 237,\n    \"codigo_banco_ordem_pagamento\" : 0, #Informar ‘0’ (zero)caso não seja OP.",
         "detail": "main",
         "documentation": {}
     },

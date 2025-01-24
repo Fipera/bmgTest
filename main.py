@@ -597,8 +597,6 @@ dict_infos = {
     "cpf": "46128832253",
     "codigo_entidade" : 1581, # 1581 ou 4277
     "matricula": "0474611299",
-    "login_consig": "SC.56306.13865437990",
-    "senha_consig": "Banco@2025",
     "numero_conta_interna": 4253628,
     "tipo_saque": 2,    #   1-SaqueAutorizado    2-Parcelado 
     "digito_agencia" : "0",
@@ -610,11 +608,15 @@ dict_infos = {
     "conta": "7052391",
     "codigo_finalidade_credito": 1, #1="Conta corrente"     2="Conta poupança"      3= “Conta BMG”
     "codigo_forma_credito": 2, # Código da Forma de crédito:Transferência Bancária [2]          Conta BMG [18] (Quando for utilizada estaforma de crédito, o tipo de finalidade tem queser sempre a 3 “Conta BMG”).
-    "codigo_loja": 56306,
     "valor_saque": 910.64,                        
     "ddd": "19",
     "celular": "997998403",
-    "codigo_seguro": ""
+    "codigo_seguro": "",
+    
+    # FIXO
+    "login_consig": "SC.56306.13865437990",
+    "senha_consig": "Banco@2025",
+    "codigo_loja": 56306,
 }
 
 # retorno_digitacao = digitacao_bmg(True, dict_infos)
