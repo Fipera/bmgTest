@@ -360,9 +360,15 @@ def digitacao_bmg_api(retorno_login,dict_infos):
     print(dict)
     if 'soapenv:Fault' in dict['soapenv:Envelope']['soapenv:Body']:
         try:
-            msg_erro = dict['soapenv:Envelope']['soapenv:Body']['soapenv:Fault']['faultstring']
+            fault_string = dict['soapenv:Envelope']['soapenv:Body']['soapenv:Fault']['faultstring']
+        
+            if '.ServiceException:' in fault_string:
+                msg_erro = fault_string.split('.ServiceException:')[-1].strip() 
+            else:
+                msg_erro = fault_string.strip()
         except Exception as e:
             msg_erro = f"Erro ao processar a mensagem: {str(e)}"
+            
         return {'sucesso': False, 'msg_retorno': msg_erro, 'obs': msg_erro}
     
     return {'sucesso':True,'numero_ade':dict['soapenv:Envelope']['soapenv:Body']['ns1:gravarPropostaSaqueComplementarResponse']['gravarPropostaSaqueComplementarReturn']['#text']}
