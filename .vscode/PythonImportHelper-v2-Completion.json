@@ -575,7 +575,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "retorno = digitacao_bmg(True,dict_infos)\nprint(retorno)\n# cpfs_df = pd.read_csv('cpfs.csv')\n# RETORNOS = {}\n# for index,row in cpfs_df.iterrows():\n#     cpf = row['CPF']\n#     cpf = \"\".join(re.findall(r\"\\d+\", cpf))\n#     cpf = cpf.zfill(11)\n#     dict_infos = {'cpf':cpf}\n#     retorno = consulta_saque_complementar_bmg(True,dict_infos)",
+        "peekOfCode": "retorno = digitacao_bmg_api(True,dict_infos)\nprint(retorno)\n# cpfs_df = pd.read_csv('cpfs.csv')\n# RETORNOS = {}\n# for index,row in cpfs_df.iterrows():\n#     cpf = row['CPF']\n#     cpf = \"\".join(re.findall(r\"\\d+\", cpf))\n#     cpf = cpf.zfill(11)\n#     dict_infos = {'cpf':cpf}\n#     retorno = consulta_saque_complementar_bmg(True,dict_infos)",
         "detail": "main",
         "documentation": {}
     },

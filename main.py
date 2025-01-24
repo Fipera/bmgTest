@@ -470,8 +470,7 @@ def digitacao_bmg(retorno_login, dict_infos):
             dict_infos['valor_saque'] = valor_saque_maximo
     except KeyError:
         dict_infos['valor_saque'] = None 
-
-    
+        return {"sucesso": False, "erro": "não existe valor de saque"}
   
 
     soap_envelope = fr'''
@@ -510,6 +509,16 @@ def digitacao_bmg(retorno_login, dict_infos):
         dict_infos['numero_parcelas'] = None 
         dict_infos['valor_parcela'] = None 
    
+   
+    codigo_produto_seguro = 47 if dict_infos["codigo_entidade"] == '4277' else 1
+    info_seguro = ''
+    if dict_infos['codigo_seguro']:
+        info_seguro = f'''<seguros xsi:type="web:ArrayOfSeguro" soapenc:arrayType="web:Seguro[1]">
+<seguro>
+<tipoSeguro>{codigo_produto_seguro}</tipoSeguro>
+<codigoPlano xsi:type="xsd:int">{dict_infos['codigo_seguro']}</codigoPlano>
+</seguro>
+</seguros>'''
    
     soap = f'''<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
    <soapenv:Header/>
@@ -605,7 +614,7 @@ dict_infos = {
 # retorno = consulta_saque_complementar_bmg(True,dict_infos)
 # print(retorno)
 
-retorno = digitacao_bmg(True,dict_infos)
+retorno = digitacao_bmg_api(True,dict_infos)
 print(retorno)
 # cpfs_df = pd.read_csv('cpfs.csv')
 # RETORNOS = {}
