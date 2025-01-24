@@ -608,7 +608,8 @@ dict_infos = {
     "codigo_loja": 56306,
     "valor_saque": 910.64,                        
     "ddd": "19",
-    "celular": "997998403"
+    "celular": "997998403",
+    "codigo_seguro": ""
 }
 
 # retorno_digitacao = digitacao_bmg(True, dict_infos)
