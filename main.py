@@ -332,9 +332,9 @@ def digitacao_bmg_api(retorno_login,dict_infos):
             </conta>
             <finalidadeCredito xsi:type="xsd:int">{dict_infos["codigo_finalidade_credito"]}</finalidadeCredito>
             <formaCredito xsi:type="xsd:int">{dict_infos["codigo_forma_credito"]}</formaCredito>
-            <numeroParcelas xsi:type="soapenc:int">{dict_infos["numero_parcelas"]}</numeroParcelas>
+            <numeroParcelas xsi:type="soapenc:int">{simulacao["prazo"]}</numeroParcelas>
             {info_seguro}
-            <valorParcela xsi:type="soapenc:double">{dict_infos["valor_parcela"]}</valorParcela>
+            <valorParcela xsi:type="soapenc:double">{simulacao["valor_parcela"]}</valorParcela>
             <valorSaque xsi:type="soapenc:double">{dict_infos["valor_saque"]}</valorSaque>
             <celular1 xsi:type="web:TelefoneParameter">
                <ddd xsi:type="soapenc:string">{dict_infos["ddd"]}</ddd>
