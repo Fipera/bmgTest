@@ -26,6 +26,23 @@
         "documentation": {}
     },
     {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
         "label": "MIMEMultipart",
         "importPath": "email.mime.multipart",
         "description": "email.mime.multipart",
@@ -512,7 +529,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def consulta_saque_complementar_bmg(retorno_login,dict_infos):\n    login = 'ROBO.56306'\n    senha = r'irWY!kQD@6%rb'\n    if dict_infos.get(\"id_consulta_massa\") and not dict_infos.get('leads_saque'):\n        print('aguardando consulta em massa BMG')\n        time.sleep(randint(10,30))\n    cartoes = []\n    #vem no dict\n    url = \"https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl\"\n    cpf = dict_infos.get('cpf')",
+        "peekOfCode": "def consulta_saque_complementar_bmg(retorno_login,dict_infos):\n    login = os.getenv(\"LOGIN\")\n    senha = os.getenv(\"SENHA\")\n    if dict_infos.get(\"id_consulta_massa\") and not dict_infos.get('leads_saque'):\n        print('aguardando consulta em massa BMG')\n        time.sleep(randint(10,30))\n    cartoes = []\n    #vem no dict\n    url = \"https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl\"\n    cpf = dict_infos.get('cpf')",
         "detail": "main",
         "documentation": {}
     },
@@ -521,7 +538,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def login_api_bmg(usuario_id,nome_thread):\n    return {'driver':True,'senha_valida':True}\ndef digitacao_bmg_api(retorno_login,dict_infos):\n    dict_infos[\"cpf\"] = ''.join(re.findall(r'\\d+', dict_infos[\"cpf\"]))\n    dict_infos[\"cpf\"] = dict_infos[\"cpf\"].zfill(11)\n    simulacao = simular_saque_parcelado_bmg(retorno_login,dict_infos)\n    print(simulacao)\n    login = 'ROBO.56306'\n    senha = r'irWY!kQD@6%rb'\n    url = \"https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl\"",
+        "peekOfCode": "def login_api_bmg(usuario_id,nome_thread):\n    return {'driver':True,'senha_valida':True}\ndef digitacao_bmg_api(retorno_login,dict_infos):\n    dict_infos[\"cpf\"] = ''.join(re.findall(r'\\d+', dict_infos[\"cpf\"]))\n    dict_infos[\"cpf\"] = dict_infos[\"cpf\"].zfill(11)\n    simulacao = simular_saque_parcelado_bmg(retorno_login,dict_infos)\n    print(simulacao)\n    login = os.getenv(\"LOGIN\")\n    senha = os.getenv(\"SENHA\")\n    url = \"https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl\"",
         "detail": "main",
         "documentation": {}
     },
@@ -530,7 +547,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def digitacao_bmg_api(retorno_login,dict_infos):\n    dict_infos[\"cpf\"] = ''.join(re.findall(r'\\d+', dict_infos[\"cpf\"]))\n    dict_infos[\"cpf\"] = dict_infos[\"cpf\"].zfill(11)\n    simulacao = simular_saque_parcelado_bmg(retorno_login,dict_infos)\n    print(simulacao)\n    login = 'ROBO.56306'\n    senha = r'irWY!kQD@6%rb'\n    url = \"https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl\"\n    codigo_produto_seguro = 47 if dict_infos[\"codigo_entidade\"] == '4277' else 1\n    info_seguro = ''",
+        "peekOfCode": "def digitacao_bmg_api(retorno_login,dict_infos):\n    dict_infos[\"cpf\"] = ''.join(re.findall(r'\\d+', dict_infos[\"cpf\"]))\n    dict_infos[\"cpf\"] = dict_infos[\"cpf\"].zfill(11)\n    simulacao = simular_saque_parcelado_bmg(retorno_login,dict_infos)\n    print(simulacao)\n    login = os.getenv(\"LOGIN\")\n    senha = os.getenv(\"SENHA\")\n    url = \"https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl\"\n    codigo_produto_seguro = 47 if dict_infos[\"codigo_entidade\"] == '4277' else 1\n    info_seguro = ''",
         "detail": "main",
         "documentation": {}
     },
@@ -539,7 +556,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def simular_saque_parcelado_bmg(retorno_login,dict_infos):\n    url = \"https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl\"\n    login = 'ROBO.56306'\n    senha = r'irWY!kQD@6%rb'\n    soap = f'''\n<soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservice.econsig.bmg.com\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:buscarSimulacao soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\n         <param xsi:type=\"web:SimulacaoCartaoParameter\">",
+        "peekOfCode": "def simular_saque_parcelado_bmg(retorno_login,dict_infos):\n    url = \"https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl\"\n    login = os.getenv(\"LOGIN\")\n    senha = os.getenv(\"SENHA\")\n    soap = f'''\n<soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservice.econsig.bmg.com\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:buscarSimulacao soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\n         <param xsi:type=\"web:SimulacaoCartaoParameter\">",
         "detail": "main",
         "documentation": {}
     },
@@ -548,7 +565,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "dict_modalidade_saque = {\n    'Parcelado':'2',\n}\ndef consulta_saque_complementar_bmg(retorno_login,dict_infos):\n    login = 'ROBO.56306'\n    senha = r'irWY!kQD@6%rb'\n    if dict_infos.get(\"id_consulta_massa\") and not dict_infos.get('leads_saque'):\n        print('aguardando consulta em massa BMG')\n        time.sleep(randint(10,30))\n    cartoes = []",
+        "peekOfCode": "dict_modalidade_saque = {\n    'Parcelado':'2',\n}\ndef consulta_saque_complementar_bmg(retorno_login,dict_infos):\n    login = os.getenv(\"LOGIN\")\n    senha = os.getenv(\"SENHA\")\n    if dict_infos.get(\"id_consulta_massa\") and not dict_infos.get('leads_saque'):\n        print('aguardando consulta em massa BMG')\n        time.sleep(randint(10,30))\n    cartoes = []",
         "detail": "main",
         "documentation": {}
     },

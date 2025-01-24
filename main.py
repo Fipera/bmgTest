@@ -1,7 +1,8 @@
 from models import *
 import xml.etree.ElementTree as ET
 import xmltodict
-
+from dotenv import load_dotenv
+import os
 
 dict_modalidade_saque = {
     'Parcelado':'2',
@@ -9,8 +10,8 @@ dict_modalidade_saque = {
 
 
 def consulta_saque_complementar_bmg(retorno_login,dict_infos):
-    login = 'ROBO.56306'
-    senha = r'irWY!kQD@6%rb'
+    login = os.getenv("LOGIN")
+    senha = os.getenv("SENHA")
     if dict_infos.get("id_consulta_massa") and not dict_infos.get('leads_saque'):
         print('aguardando consulta em massa BMG')
         time.sleep(randint(10,30))
@@ -291,8 +292,8 @@ def digitacao_bmg_api(retorno_login,dict_infos):
     dict_infos["cpf"] = dict_infos["cpf"].zfill(11)
     simulacao = simular_saque_parcelado_bmg(retorno_login,dict_infos)
     print(simulacao)
-    login = 'ROBO.56306'
-    senha = r'irWY!kQD@6%rb'
+    login = os.getenv("LOGIN")
+    senha = os.getenv("SENHA")
     
     url = "https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl"
     codigo_produto_seguro = 47 if dict_infos["codigo_entidade"] == '4277' else 1
@@ -381,8 +382,8 @@ def digitacao_bmg_api(retorno_login,dict_infos):
 
 def simular_saque_parcelado_bmg(retorno_login,dict_infos):
     url = "https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl"
-    login = 'ROBO.56306'
-    senha = r'irWY!kQD@6%rb'
+    login = os.getenv("LOGIN")
+    senha = os.getenv("SENHA")
     
     soap = f'''
 <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com">
@@ -412,38 +413,10 @@ def simular_saque_parcelado_bmg(retorno_login,dict_infos):
     retorno = dict['soapenv:Envelope']['soapenv:Body']['ns1:buscarSimulacaoResponse']['buscarSimulacaoReturn']['buscarSimulacaoReturn']
     return {'prazo':retorno['numeroParcelas']['#text'],'valor_parcela':retorno['valorParcela']['#text']}
 
-# dict_infos = {
-#     "login": "your_login",
-#     "senha": "your_password",
-#     'login_consig':'SC.56306.07039312964',
-#     'senha_consig': 'Consig@2024',
-#     "codigo_entidade": "1581",
-#     "ddd":'48',
-#     'celular':'998316405',
-#     "codigo_loja":"56306",
-#     "cpf": "39015335249",
-#     "matricula": "1367594208",
-#     "numero_conta_interna": "8727750",
-#     "tipo_saque": "2",
-#     "digito_agencia": "0",
-#     "agencia": "0001",
-#     "codigo_banco": "260",
-#     "codigo_banco_ordem_pagamento": "0",
-#     "codigo_forma_envio_termo": "15",
-#     "digito_conta": "1",
-#     "conta": "123456789",
-#     "cpf_digitador": "43695106867",
-#     "codigo_forma_credito": "2",
-#     "numero_parcelas": "84",
-#     "valor_parcela": "42.11",
-#     "codigo_finalidade_credito":'1',
-#     "valor_saque": "1433.00",
-#     'codigo_seguro':'76'
-# }
 
 # def digitacao_bmg(retorno_login, dict_infos):
-#     login = 'ROBO.56306'
-#     senha = r'irWY!kQD@6%rb'
+#     login = os.getenv("LOGIN")
+#     senha = os.getenv("SENHA")
 #     url = "https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl"
    
 #     soap_envelope = fr'''
@@ -623,8 +596,8 @@ dict_infos = {
     "codigo_seguro": "",
     
     # FIXO
-    "login_consig": "SC.56306.13865437990",
-    "senha_consig": "Banco@2025",
+    "login_consig": os.getenv("LOGIN_CONSIG"),
+    "senha_consig":  os.getenv("SENHA_CONSIG"),
     "codigo_loja": 56306,
 }
 
@@ -634,7 +607,7 @@ dict_infos = {
 # retorno = simular_saque_parcelado_bmg(True,dict_infos)
 # retorno_digitacao = digitacao_bmg(True, dict_infos_2)
 # print(retorno_digitacao)
-# 14581035104
+
 # retorno = consulta_saque_complementar_bmg(True,dict_infos)
 # print(retorno)
 
