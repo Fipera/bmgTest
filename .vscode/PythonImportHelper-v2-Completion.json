@@ -538,7 +538,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def login_api_bmg(usuario_id,nome_thread):\n    return {'driver':True,'senha_valida':True}\ndef digitacao_bmg_api(retorno_login,dict_infos):\n    dict_infos[\"cpf\"] = ''.join(re.findall(r'\\d+', dict_infos[\"cpf\"]))\n    dict_infos[\"cpf\"] = dict_infos[\"cpf\"].zfill(11)\n    simulacao = simular_saque_parcelado_bmg(retorno_login,dict_infos)\n    print(simulacao)\n    login = os.getenv(\"LOGIN\")\n    senha = os.getenv(\"SENHA\")\n    print(login)",
+        "peekOfCode": "def login_api_bmg(usuario_id,nome_thread):\n    return {'driver':True,'senha_valida':True}\ndef digitacao_bmg_api(retorno_login,dict_infos):\n    dict_infos[\"cpf\"] = ''.join(re.findall(r'\\d+', dict_infos[\"cpf\"]))\n    dict_infos[\"cpf\"] = dict_infos[\"cpf\"].zfill(11)\n    simulacao = simular_saque_parcelado_bmg(retorno_login,dict_infos)\n    print(simulacao)\n    login = os.getenv(\"LOGIN\")\n    senha = os.getenv(\"SENHA\")\n    url = \"https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl\"",
         "detail": "main",
         "documentation": {}
     },
@@ -547,7 +547,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def digitacao_bmg_api(retorno_login,dict_infos):\n    dict_infos[\"cpf\"] = ''.join(re.findall(r'\\d+', dict_infos[\"cpf\"]))\n    dict_infos[\"cpf\"] = dict_infos[\"cpf\"].zfill(11)\n    simulacao = simular_saque_parcelado_bmg(retorno_login,dict_infos)\n    print(simulacao)\n    login = os.getenv(\"LOGIN\")\n    senha = os.getenv(\"SENHA\")\n    print(login)\n    print(senha)\n    url = \"https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl\"",
+        "peekOfCode": "def digitacao_bmg_api(retorno_login,dict_infos):\n    dict_infos[\"cpf\"] = ''.join(re.findall(r'\\d+', dict_infos[\"cpf\"]))\n    dict_infos[\"cpf\"] = dict_infos[\"cpf\"].zfill(11)\n    simulacao = simular_saque_parcelado_bmg(retorno_login,dict_infos)\n    print(simulacao)\n    login = os.getenv(\"LOGIN\")\n    senha = os.getenv(\"SENHA\")\n    url = \"https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl\"\n    codigo_produto_seguro = 47 if dict_infos[\"codigo_entidade\"] == '4277' else 1\n    info_seguro = ''",
         "detail": "main",
         "documentation": {}
     },
@@ -556,7 +556,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def simular_saque_parcelado_bmg(retorno_login,dict_infos):\n    url = \"https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl\"\n    login = os.getenv(\"LOGIN\")\n    senha = os.getenv(\"SENHA\")\n    print(login, senha)\n    soap = f'''\n<soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservice.econsig.bmg.com\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:buscarSimulacao soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">",
+        "peekOfCode": "def simular_saque_parcelado_bmg(retorno_login,dict_infos):\n    url = \"https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl\"\n    login = os.getenv(\"LOGIN\")\n    senha = os.getenv(\"SENHA\")\n    soap = f'''\n<soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservice.econsig.bmg.com\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:buscarSimulacao soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\n         <param xsi:type=\"web:SimulacaoCartaoParameter\">",
         "detail": "main",
         "documentation": {}
     },

@@ -295,8 +295,7 @@ def digitacao_bmg_api(retorno_login,dict_infos):
     print(simulacao)
     login = os.getenv("LOGIN")
     senha = os.getenv("SENHA")
-    print(login)
-    print(senha)
+  
     
     url = "https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl"
     codigo_produto_seguro = 47 if dict_infos["codigo_entidade"] == '4277' else 1
@@ -387,7 +386,6 @@ def simular_saque_parcelado_bmg(retorno_login,dict_infos):
     url = "https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl"
     login = os.getenv("LOGIN")
     senha = os.getenv("SENHA")
-    print(login, senha)
     soap = f'''
 <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com">
    <soapenv:Header/>
