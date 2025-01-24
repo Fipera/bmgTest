@@ -433,171 +433,172 @@ def simular_saque_parcelado_bmg(retorno_login,dict_infos):
 #     'codigo_seguro':'76'
 # }
 
-def digitacao_bmg(retorno_login, dict_infos):
-    login = 'ROBO.56306'
-    senha = r'irWY!kQD@6%rb'
-    url = "https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl"
+# def digitacao_bmg(retorno_login, dict_infos):
+#     login = 'ROBO.56306'
+#     senha = r'irWY!kQD@6%rb'
+#     url = "https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl"
    
-    soap_envelope = fr'''
-    <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com">
-    <soapenv:Header/>
-    <soapenv:Body>
-        <web:buscarLimiteSaque soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-            <param xsi:type="web:DadosCartaoParameter">
-                <login xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{login}</login>
-                <senha xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{senha}</senha>
-                <codigoEntidade xsi:type="xsd:int">{dict_infos["codigo_entidade"]}</codigoEntidade>
-                <cpf xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{dict_infos["cpf"]}</cpf>
-                <matricula xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{dict_infos["matricula"]}</matricula>
-                <numeroContaInterna xsi:type="xsd:long">{dict_infos["numero_conta_interna"]}</numeroContaInterna>
-                <tipoSaque xsi:type="xsd:int">{dict_infos["tipo_saque"]}</tipoSaque>
-            </param>
-        </web:buscarLimiteSaque>
-    </soapenv:Body>
-    </soapenv:Envelope>'''
+#     soap_envelope = fr'''
+#     <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com">
+#     <soapenv:Header/>
+#     <soapenv:Body>
+#         <web:buscarLimiteSaque soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+#             <param xsi:type="web:DadosCartaoParameter">
+#                 <login xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{login}</login>
+#                 <senha xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{senha}</senha>
+#                 <codigoEntidade xsi:type="xsd:int">{dict_infos["codigo_entidade"]}</codigoEntidade>
+#                 <cpf xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{dict_infos["cpf"]}</cpf>
+#                 <matricula xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{dict_infos["matricula"]}</matricula>
+#                 <numeroContaInterna xsi:type="xsd:long">{dict_infos["numero_conta_interna"]}</numeroContaInterna>
+#                 <tipoSaque xsi:type="xsd:int">{dict_infos["tipo_saque"]}</tipoSaque>
+#             </param>
+#         </web:buscarLimiteSaque>
+#     </soapenv:Body>
+#     </soapenv:Envelope>'''
         
-    headers = {
-        "Content-Type": "text/xml; charset=utf-8",
-        "Content-Length": str(len(soap_envelope)),
-        "SOAPAction": "http://webservice.econsig.bmg.com/buscarLimiteSaque",
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
-    }
+#     headers = {
+#         "Content-Type": "text/xml; charset=utf-8",
+#         "Content-Length": str(len(soap_envelope)),
+#         "SOAPAction": "http://webservice.econsig.bmg.com/buscarLimiteSaque",
+#         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
+#     }
 
-    response = requests.post(url, data=soap_envelope, headers=headers)
-    response_dict = xmltodict.parse(response.content)
-    try:
-        valor_saque_maximo = float(
-            response_dict['soapenv:Envelope']['soapenv:Body']['ns1:buscarLimiteSaqueResponse']
-            ['buscarLimiteSaqueReturn']['valorSaqueMaximo']['#text']
-        )
-        valor_saque_minimo = float(
-            response_dict['soapenv:Envelope']['soapenv:Body']['ns1:buscarLimiteSaqueResponse']
-            ['buscarLimiteSaqueReturn']['valorSaqueMinimo']['#text']
-        )
+#     response = requests.post(url, data=soap_envelope, headers=headers)
+#     response_dict = xmltodict.parse(response.content)
+#     try:
+#         valor_saque_maximo = float(
+#             response_dict['soapenv:Envelope']['soapenv:Body']['ns1:buscarLimiteSaqueResponse']
+#             ['buscarLimiteSaqueReturn']['valorSaqueMaximo']['#text']
+#         )
+#         valor_saque_minimo = float(
+#             response_dict['soapenv:Envelope']['soapenv:Body']['ns1:buscarLimiteSaqueResponse']
+#             ['buscarLimiteSaqueReturn']['valorSaqueMinimo']['#text']
+#         )
         
         
-        if dict_infos['valor_saque'] and dict_infos['valor_saque'] <= valor_saque_maximo and dict_infos['valor_saque'] >= valor_saque_minimo:
-            dict_infos['valor_saque'] = dict_infos['valor_saque']
-        else:
-            dict_infos['valor_saque'] = valor_saque_maximo
-    except KeyError:
-        dict_infos['valor_saque'] = None 
-        return {"sucesso": False, "erro": "não existe valor de saque"}
+#         if dict_infos['valor_saque'] and dict_infos['valor_saque'] <= valor_saque_maximo and dict_infos['valor_saque'] >= valor_saque_minimo:
+#             dict_infos['valor_saque'] = dict_infos['valor_saque']
+#         else:
+#             dict_infos['valor_saque'] = valor_saque_maximo
+#     except KeyError:
+#         dict_infos['valor_saque'] = None 
+#         return {"sucesso": False, "erro": "não existe valor de saque"}
   
 
-    soap_envelope = fr'''
-    <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com">
-    <soapenv:Header/>
-    <soapenv:Body>
-        <web:buscarSimulacao  soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-            <param xsi:type="web:SimulacaoCartaoParameter">
-                <login xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{login}</login>
-                <senha xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{senha}</senha>
-                <codigoEntidade xsi:type="xsd:int">{dict_infos["codigo_entidade"]}</codigoEntidade>
-                <valorSaque xsi:type="xsd:double">{dict_infos["valor_saque"]}</valorSaque>
-            </param>
-        </web:buscarSimulacao>
-    </soapenv:Body>
-    </soapenv:Envelope>'''
+#     soap_envelope = fr'''
+#     <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com">
+#     <soapenv:Header/>
+#     <soapenv:Body>
+#         <web:buscarSimulacao  soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+#             <param xsi:type="web:SimulacaoCartaoParameter">
+#                 <login xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{login}</login>
+#                 <senha xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{senha}</senha>
+#                 <codigoEntidade xsi:type="xsd:int">{dict_infos["codigo_entidade"]}</codigoEntidade>
+#                 <valorSaque xsi:type="xsd:double">{dict_infos["valor_saque"]}</valorSaque>
+#             </param>
+#         </web:buscarSimulacao>
+#     </soapenv:Body>
+#     </soapenv:Envelope>'''
         
-    headers = {
-        "Content-Type": "text/xml; charset=utf-8",
-        "Content-Length": str(len(soap_envelope)),
-        "SOAPAction": "http://webservice.econsig.bmg.com/buscarSimulacao ",
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
-    }
+#     headers = {
+#         "Content-Type": "text/xml; charset=utf-8",
+#         "Content-Length": str(len(soap_envelope)),
+#         "SOAPAction": "http://webservice.econsig.bmg.com/buscarSimulacao ",
+#         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
+#     }
 
-    response = requests.post(url, data=soap_envelope, headers=headers)
-    response_dict = xmltodict.parse(response.content)
-    try:
-        simulacao_return = response_dict['soapenv:Envelope']['soapenv:Body']['ns1:buscarSimulacaoResponse']['buscarSimulacaoReturn']['buscarSimulacaoReturn']
-        numero_parcelas = int(simulacao_return['numeroParcelas']['#text'])
-        valor_parcela = float(simulacao_return['valorParcela']['#text'])
+#     response = requests.post(url, data=soap_envelope, headers=headers)
+#     response_dict = xmltodict.parse(response.content)
+#     try:
+#         simulacao_return = response_dict['soapenv:Envelope']['soapenv:Body']['ns1:buscarSimulacaoResponse']['buscarSimulacaoReturn']['buscarSimulacaoReturn']
+#         numero_parcelas = int(simulacao_return['numeroParcelas']['#text'])
+#         valor_parcela = float(simulacao_return['valorParcela']['#text'])
 
        
-        dict_infos['numero_parcelas'] = numero_parcelas
-        dict_infos['valor_parcela'] = valor_parcela
-    except KeyError as e:
-        dict_infos['numero_parcelas'] = None 
-        dict_infos['valor_parcela'] = None 
+#         dict_infos['numero_parcelas'] = numero_parcelas
+#         dict_infos['valor_parcela'] = valor_parcela
+#     except KeyError as e:
+#         dict_infos['numero_parcelas'] = None 
+#         dict_infos['valor_parcela'] = None 
    
    
-    codigo_produto_seguro = 47 if dict_infos["codigo_entidade"] == '4277' else 1
-    info_seguro = ''
-    if dict_infos['codigo_seguro']:
-        info_seguro = f'''<seguros xsi:type="web:ArrayOfSeguro" soapenc:arrayType="web:Seguro[1]">
-<seguro>
-<tipoSeguro>{codigo_produto_seguro}</tipoSeguro>
-<codigoPlano xsi:type="xsd:int">{dict_infos['codigo_seguro']}</codigoPlano>
-</seguro>
-</seguros>'''
+#     codigo_produto_seguro = 47 if dict_infos["codigo_entidade"] == '4277' else 1
+#     info_seguro = ''
+#     if dict_infos['codigo_seguro']:
+#         info_seguro = f'''<seguros xsi:type="web:ArrayOfSeguro" soapenc:arrayType="web:Seguro[1]">
+# <seguro>
+# <tipoSeguro>{codigo_produto_seguro}</tipoSeguro>
+# <codigoPlano xsi:type="xsd:int">{dict_infos['codigo_seguro']}</codigoPlano>
+# </seguro>
+# </seguros>'''
    
-    soap = f'''<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
-   <soapenv:Header/>
-   <soapenv:Body>
-      <web:gravarPropostaSaqueComplementar soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-         <proposta xsi:type="web:SaqueComplementarParameter">
-            <login xsi:type="soapenc:string">{login}</login>
-            <senha xsi:type="soapenc:string">{senha}</senha>
-            <loginConsig xsi:type="soapenc:string">{dict_infos["login_consig"]}</loginConsig>
-            <senhaConsig xsi:type="soapenc:string">{dict_infos["senha_consig"]}</senhaConsig>
-            <cpfImpedidoComissionar xsi:type="xsd:boolean">{False}</cpfImpedidoComissionar>
-            <codigoEntidade xsi:type="xsd:int">{dict_infos["codigo_entidade"]}</codigoEntidade>
-            <cpf xsi:type="soapenc:string">{dict_infos["cpf"]}</cpf>
-            <matricula xsi:type="soapenc:string">{dict_infos["matricula"]}</matricula>
-            <numeroContaInterna xsi:type="xsd:long">{dict_infos["numero_conta_interna"]}</numeroContaInterna>
-            <tipoSaque xsi:type="xsd:int">{dict_infos["tipo_saque"]}</tipoSaque>
-            <agencia xsi:type="web:AgenciaParameter">
-               <digitoVerificador xsi:type="soapenc:string">{dict_infos["digito_agencia"]}</digitoVerificador>
-               <numero xsi:type="soapenc:string">{dict_infos["agencia"]}</numero>
-            </agencia>
-            <aberturaContaPagamento xsi:type="xsd:int">{0}</aberturaContaPagamento>
-            <banco xsi:type="web:BancoParameter">
-               <numero xsi:type="xsd:int">{dict_infos["codigo_banco"]}</numero>
-            </banco>
-            <bancoOrdemPagamento xsi:type="xsd:int">{dict_infos["codigo_banco_ordem_pagamento"]}</bancoOrdemPagamento>
-            <codigoFormaEnvioTermo xsi:type="soapenc:string">{dict_infos["codigo_forma_envio_termo"]}</codigoFormaEnvioTermo>
-            <conta xsi:type="web:ContaParameter">
-               <digitoVerificador xsi:type="soapenc:string">{dict_infos["digito_conta"]}</digitoVerificador>
-               <numero xsi:type="soapenc:string">{dict_infos["conta"]}</numero>
-            </conta>
-            <finalidadeCredito xsi:type="xsd:int">{dict_infos["codigo_finalidade_credito"]}</finalidadeCredito>
-            <formaCredito xsi:type="xsd:int">{dict_infos["codigo_forma_credito"]}</formaCredito>
-            <numeroParcelas xsi:type="soapenc:int">{dict_infos["numero_parcelas"]}</numeroParcelas>
-            <valorParcela xsi:type="soapenc:double">{dict_infos["valor_parcela"]}</valorParcela>
-            <valorSaque xsi:type="soapenc:double">{dict_infos["valor_saque"]}</valorSaque>
-            <codigoLoja xsi:type="xsd:int">{dict_infos["codigo_loja"]}</codigoLoja>
-            <email xsi:type="soapenc:string">{"nome.nome@gmail.com"}</email>
-            <celular1 xsi:type="web:TelefoneParameter">
-               <ddd xsi:type="soapenc:string">{dict_infos["ddd"]}</ddd>
-               <numero xsi:type="soapenc:string">{dict_infos["celular"]}</numero>
-               <ramal xsi:type="soapenc:string"></ramal>
-            </celular1>
-         </proposta>
-      </web:gravarPropostaSaqueComplementar>
-   </soapenv:Body>
-</soapenv:Envelope>'''  
+#     soap = f'''<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+#    <soapenv:Header/>
+#    <soapenv:Body>
+#       <web:gravarPropostaSaqueComplementar soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+#          <proposta xsi:type="web:SaqueComplementarParameter">
+#             <login xsi:type="soapenc:string">{login}</login>
+#             <senha xsi:type="soapenc:string">{senha}</senha>
+#             <loginConsig xsi:type="soapenc:string">{dict_infos["login_consig"]}</loginConsig>
+#             <senhaConsig xsi:type="soapenc:string">{dict_infos["senha_consig"]}</senhaConsig>
+#             <cpfImpedidoComissionar xsi:type="xsd:boolean">{False}</cpfImpedidoComissionar>
+#             <codigoEntidade xsi:type="xsd:int">{dict_infos["codigo_entidade"]}</codigoEntidade>
+#             <cpf xsi:type="soapenc:string">{dict_infos["cpf"]}</cpf>
+#             <matricula xsi:type="soapenc:string">{dict_infos["matricula"]}</matricula>
+#             <numeroContaInterna xsi:type="xsd:long">{dict_infos["numero_conta_interna"]}</numeroContaInterna>
+#             <tipoSaque xsi:type="xsd:int">{dict_infos["tipo_saque"]}</tipoSaque>
+#             <agencia xsi:type="web:AgenciaParameter">
+#                <digitoVerificador xsi:type="soapenc:string">{dict_infos["digito_agencia"]}</digitoVerificador>
+#                <numero xsi:type="soapenc:string">{dict_infos["agencia"]}</numero>
+#             </agencia>
+#             <aberturaContaPagamento xsi:type="xsd:int">{0}</aberturaContaPagamento>
+#             <banco xsi:type="web:BancoParameter">
+#                <numero xsi:type="xsd:int">{dict_infos["codigo_banco"]}</numero>
+#             </banco>
+#             <bancoOrdemPagamento xsi:type="xsd:int">{dict_infos["codigo_banco_ordem_pagamento"]}</bancoOrdemPagamento>
+#             <codigoFormaEnvioTermo xsi:type="soapenc:string">{dict_infos["codigo_forma_envio_termo"]}</codigoFormaEnvioTermo>
+#             <conta xsi:type="web:ContaParameter">
+#                <digitoVerificador xsi:type="soapenc:string">{dict_infos["digito_conta"]}</digitoVerificador>
+#                <numero xsi:type="soapenc:string">{dict_infos["conta"]}</numero>
+#             </conta>
+#             <finalidadeCredito xsi:type="xsd:int">{dict_infos["codigo_finalidade_credito"]}</finalidadeCredito>
+#             <formaCredito xsi:type="xsd:int">{dict_infos["codigo_forma_credito"]}</formaCredito>
+#             <numeroParcelas xsi:type="soapenc:int">{dict_infos["numero_parcelas"]}</numeroParcelas>
+#             <valorParcela xsi:type="soapenc:double">{dict_infos["valor_parcela"]}</valorParcela>
+#             <valorSaque xsi:type="soapenc:double">{dict_infos["valor_saque"]}</valorSaque>
+#             <codigoLoja xsi:type="xsd:int">{dict_infos["codigo_loja"]}</codigoLoja>
+#             <email xsi:type="soapenc:string">{"nome.nome@gmail.com"}</email>
+#             <celular1 xsi:type="web:TelefoneParameter">
+#                <ddd xsi:type="soapenc:string">{dict_infos["ddd"]}</ddd>
+#                <numero xsi:type="soapenc:string">{dict_infos["celular"]}</numero>
+#                <ramal xsi:type="soapenc:string"></ramal>
+#             </celular1>
+#          </proposta>
+#       </web:gravarPropostaSaqueComplementar>
+#    </soapenv:Body>
+# </soapenv:Envelope>'''  
 
   
 
 
-    headers = {
-        "Content-Type": "text/xml; charset=utf-8",
-        "Content-Length": str(len(soap)),
-        "SOAPAction": "http://webservice.econsig.bmg.com/gravarPropostaSaqueComplementar",  # Replace with the appropriate SOAP action
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
+#     headers = {
+#         "Content-Type": "text/xml; charset=utf-8",
+#         "Content-Length": str(len(soap)),
+#         "SOAPAction": "http://webservice.econsig.bmg.com/gravarPropostaSaqueComplementar",  # Replace with the appropriate SOAP action
+#         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
 
-    }
+#     }
 
-    response = requests.post(url, data=soap, headers=headers)
-    print("RESPOSTA:")
-    print(response.content)
+#     response = requests.post(url, data=soap, headers=headers)
+#     print("RESPOSTA:")
+#     print(response.content)
 
 dict_infos = {
-    "cpf": "46128832253",
+    "cpf": "1026283",
+    "matricula": "1424938705",
+    "numero_conta_interna": 8692642,
+    
     "codigo_entidade" : 1581, # 1581 ou 4277
-    "matricula": "0474611299",
-    "numero_conta_interna": 4253628,
     "tipo_saque": 2,    #   1-SaqueAutorizado    2-Parcelado 
     "digito_agencia" : "0",
     "agencia" : "1060",

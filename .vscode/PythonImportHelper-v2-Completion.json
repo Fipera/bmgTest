@@ -544,15 +544,6 @@
         "documentation": {}
     },
     {
-        "label": "digitacao_bmg",
-        "kind": 2,
-        "importPath": "main",
-        "description": "main",
-        "peekOfCode": "def digitacao_bmg(retorno_login, dict_infos):\n    login = 'ROBO.56306'\n    senha = r'irWY!kQD@6%rb'\n    url = \"https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl\"\n    soap_envelope = fr'''\n    <soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservice.econsig.bmg.com\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <web:buscarLimiteSaque soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\n            <param xsi:type=\"web:DadosCartaoParameter\">",
-        "detail": "main",
-        "documentation": {}
-    },
-    {
         "label": "dict_modalidade_saque",
         "kind": 5,
         "importPath": "main",
@@ -566,7 +557,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "dict_infos = {\n    \"cpf\": \"46128832253\",\n    \"codigo_entidade\" : 1581, # 1581 ou 4277\n    \"matricula\": \"0474611299\",\n    \"numero_conta_interna\": 4253628,\n    \"tipo_saque\": 2,    #   1-SaqueAutorizado    2-Parcelado \n    \"digito_agencia\" : \"0\",\n    \"agencia\" : \"1060\",\n    \"codigo_banco\" : 237,\n    \"codigo_banco_ordem_pagamento\" : 0, #Informar ‘0’ (zero)caso não seja OP.",
+        "peekOfCode": "dict_infos = {\n    \"cpf\": \"1026283\",\n    \"matricula\": \"1424938705\",\n    \"numero_conta_interna\": 8692642,\n    \"codigo_entidade\" : 1581, # 1581 ou 4277\n    \"tipo_saque\": 2,    #   1-SaqueAutorizado    2-Parcelado \n    \"digito_agencia\" : \"0\",\n    \"agencia\" : \"1060\",\n    \"codigo_banco\" : 237,\n    \"codigo_banco_ordem_pagamento\" : 0, #Informar ‘0’ (zero)caso não seja OP.",
         "detail": "main",
         "documentation": {}
     },
