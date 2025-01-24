@@ -424,9 +424,37 @@ def simular_saque_parcelado_bmg(retorno_login,dict_infos):
 def digitacao_bmg(retorno_login, dict_infos):
     login = 'ROBO.56306'
     senha = r'irWY!kQD@6%rb'
-    dict_consulta = {"cpf": "46128832253"}
-    consulta = consulta_saque_complementar_bmg(retorno_login, dict_consulta)
-    print(f" CONSULTA : {consulta}")
+    url = "https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl"
+   
+    soap_envelope = fr'''
+    <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <web:buscarLimiteSaque soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+            <param xsi:type="web:DadosCartaoParameter">
+                <login xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{login}</login>
+                <senha xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{senha}</senha>
+                <codigoEntidade xsi:type="xsd:int">{dict_infos["codigo_entidade"]}</codigoEntidade>
+                <cpf xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{dict_infos["cpf"]}</cpf>
+                <matricula xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{dict_infos["matricula"]}</matricula>
+                <numeroContaInterna xsi:type="xsd:long">{dict_infos["numero_conta_interna"]}</numeroContaInterna>
+                <tipoSaque xsi:type="xsd:int">{dict_infos["tipo_saque"]}</tipoSaque>
+            </param>
+        </web:buscarLimiteSaque>
+    </soapenv:Body>
+    </soapenv:Envelope>'''
+        
+    headers = {
+        "Content-Type": "text/xml; charset=utf-8",
+        "Content-Length": str(len(soap_envelope)),
+        "SOAPAction": "http://webservice.econsig.bmg.com/buscarLimiteSaque",
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
+    }
+
+    response = requests.post(url, data=soap_envelope, headers=headers)
+    print(response.content)
+    return response
+   
     soap = f'''<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
    <soapenv:Header/>
    <soapenv:Body>
@@ -434,11 +462,11 @@ def digitacao_bmg(retorno_login, dict_infos):
          <proposta xsi:type="web:SaqueComplementarParameter">
             <login xsi:type="soapenc:string">{login}</login>
             <senha xsi:type="soapenc:string">{senha}</senha>
+            <loginConsig xsi:type="soapenc:string">{dict_infos["login_consig"]}</loginConsig>
+            <senhaConsig xsi:type="soapenc:string">{dict_infos["senha_consig"]}</senhaConsig>
             <codigoEntidade xsi:type="xsd:int">{dict_infos["codigo_entidade"]}</codigoEntidade>
             <cpf xsi:type="soapenc:string">{dict_infos["cpf"]}</cpf>
             <matricula xsi:type="soapenc:string">{dict_infos["matricula"]}</matricula>
-            <loginConsig xsi:type="soapenc:string">{dict_infos["login_consig"]}</loginConsig>
-            <senhaConsig xsi:type="soapenc:string">{dict_infos["senha_consig"]}</senhaConsig>
             <numeroContaInterna xsi:type="xsd:long">{dict_infos["numero_conta_interna"]}</numeroContaInterna>
             <tipoSaque xsi:type="xsd:int">{dict_infos["tipo_saque"]}</tipoSaque>
             <agencia xsi:type="web:AgenciaParameter">
@@ -454,26 +482,29 @@ def digitacao_bmg(retorno_login, dict_infos):
                <digitoVerificador xsi:type="soapenc:string">{dict_infos["digito_conta"]}</digitoVerificador>
                <numero xsi:type="soapenc:string">{dict_infos["conta"]}</numero>
             </conta>
-            <cpfAgente xsi:type="soapenc:string">{dict_infos["cpf_digitador"]}</cpfAgente>
             <finalidadeCredito xsi:type="xsd:int">{dict_infos["codigo_finalidade_credito"]}</finalidadeCredito>
             <formaCredito xsi:type="xsd:int">{dict_infos["codigo_forma_credito"]}</formaCredito>
             <numeroParcelas xsi:type="soapenc:int">{dict_infos["numero_parcelas"]}</numeroParcelas>
             <valorParcela xsi:type="soapenc:double">{dict_infos["valor_parcela"]}</valorParcela>
             <valorSaque xsi:type="soapenc:double">{dict_infos["valor_saque"]}</valorSaque>
-            
+            <codigoLoja xsi:type="xsd:int">{dict_infos["codigo_loja"]}</codigoLoja>
+            <celular1 xsi:type="web:TelefoneParameter">
+               <ddd xsi:type="soapenc:string">{dict_infos["ddd"]}</ddd>
+               <numero xsi:type="soapenc:string">{dict_infos["celular"]}</numero>
+               <ramal xsi:type="soapenc:string"></ramal>
+            </celular1>
          </proposta>
       </web:gravarPropostaSaqueComplementar>
    </soapenv:Body>
 </soapenv:Envelope>'''  
 
   
-    url = "https://ws1.bmgconsig.com.br/webservices/SaqueComplementar?wsdl"
 
 
     headers = {
         "Content-Type": "text/xml; charset=utf-8",
         "Content-Length": str(len(soap)),
-        "SOAPAction": "http://webservice.econsig.bmg.com/geraScript",  # Replace with the appropriate SOAP action
+        "SOAPAction": "http://webservice.econsig.bmg.com/gravarPropostaSaqueComplementar",  # Replace with the appropriate SOAP action
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
 
     }
@@ -489,23 +520,22 @@ dict_infos = {
     "login_consig": "SC.56306.13865437990",
     "senha_consig": "Banco@2025",
     "numero_conta_interna": 4253628,
-    "tipo_saque": 2,    #   1-SaqueAutorizado    2-SaqueAutorizadoParcelado    3-SaqueAutorizadoLojista     4-SaqueAutorizadoParceladoLojista     5-SaqueAutorizadoDecimoTerceiro
+    "tipo_saque": 2,    #   1-SaqueAutorizado    2-Parcelado 
     "digito_agencia" : "0",
     "agencia" : "1060",
     "codigo_banco" : 237,
     "codigo_banco_ordem_pagamento" : 0, #Informar ‘0’ (zero)caso não seja OP.
-    "codigo_forma_envio_termo" : "12", # Balcao(0)    Email(1)    Sedex(2)    GetNet(3)   MotoBoy(4)  EntregaPessoal(5)   CartaoBMGFacilInternet(6)
-                                     # CartaoBMGFacilInternetSenhaValidada(7)    DocumentoDigital(8)     Gravacao(9)     InternetBanking(11)     Mobile(12)
+    "codigo_forma_envio_termo" : "15", # Físico/Balcao [0]      Digital [15]        Digital Token [21] (O token é gerado apenasatravés do aplicativo “Sou Parceiro BMG”).
     "digito_conta" : "1",
     "conta": "7052391",
-    "cpf_digitador": "43695106867",
-    "codigo_finalidade_credito": 2, # 1 - Conta Movimento   2- Conta Poupança
-    "codigo_forma_credito": 2, # TedContaSalario(1)    TedContaCredito(2)  OrdemPagamento(3)   AgenciaPagadoraBMG(4)   SemFinanceiro(5)    CartaoBMBCash(6)    
-                                # Opcional(7)   BMGCheque(8)   CartaoDinheiroRapido(9)     ChequeAdministrativo(12)    SaqueTecban(14)     SaqueOpAtm(15)
+    "codigo_finalidade_credito": 1, #1="Conta corrente"     2="Conta poupança"      3= “Conta BMG”
+    "codigo_forma_credito": 2, # Código da Forma de crédito:Transferência Bancária [2]          Conta BMG [18] (Quando for utilizada estaforma de crédito, o tipo de finalidade tem queser sempre a 3 “Conta BMG”).
     "numero_parcelas": 84,
     "valor_parcela": 42.11,
-    "valor_saque": 910.64,                            
-    
+    "valor_saque": 910.64,
+    "codigo_loja": 56306,                        
+    "ddd": "19",
+    "celular": "997998403"
 }
 
 # retorno_digitacao = digitacao_bmg(True, dict_infos)
