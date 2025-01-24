@@ -557,7 +557,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "dict_infos = {\n    \"cpf\": \"135995264\",\n    \"matricula\": \"1425695210\",\n    \"numero_conta_interna\": 19500981,\n    \"codigo_entidade\" : 1581, # 1581 ou 4277\n    \"tipo_saque\": 2,    #   1-SaqueAutorizado    2-Parcelado \n    \"digito_agencia\" : \"0\",\n    \"agencia\" : \"1060\",\n    \"codigo_banco\" : 237,\n    \"codigo_banco_ordem_pagamento\" : 0, #Informar ‘0’ (zero)caso não seja OP.",
+        "peekOfCode": "dict_infos = {\n    \"cpf\": \"135995264\",\n    \"matricula\": \"1425695210\",\n    \"numero_conta_interna\": 17733682,\n    \"codigo_entidade\" : 1581, # 1581 ou 4277\n    \"tipo_saque\": 2,    #   1-SaqueAutorizado    2-Parcelado \n    \"digito_agencia\" : \"0\",\n    \"agencia\" : \"1060\",\n    \"codigo_banco\" : 237,\n    \"codigo_banco_ordem_pagamento\" : 0, #Informar ‘0’ (zero)caso não seja OP.",
         "detail": "main",
         "documentation": {}
     },

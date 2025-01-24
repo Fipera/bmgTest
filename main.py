@@ -604,7 +604,7 @@ def simular_saque_parcelado_bmg(retorno_login,dict_infos):
 dict_infos = {
     "cpf": "135995264",
     "matricula": "1425695210",
-    "numero_conta_interna": 19500981,
+    "numero_conta_interna": 17733682,
     
     "codigo_entidade" : 1581, # 1581 ou 4277
     "tipo_saque": 2,    #   1-SaqueAutorizado    2-Parcelado 
@@ -617,7 +617,7 @@ dict_infos = {
     "conta": "7052391",
     "codigo_finalidade_credito": 1, #1="Conta corrente"     2="Conta poupança"      3= “Conta BMG”
     "codigo_forma_credito": 2, # Código da Forma de crédito:Transferência Bancária [2]          Conta BMG [18] (Quando for utilizada estaforma de crédito, o tipo de finalidade tem queser sempre a 3 “Conta BMG”).
-    "valor_saque": 987.12 ,                        
+    "valor_saque": 967.8 ,                        
     "ddd": "19",
     "celular": "997998403",
     "codigo_seguro": "",
