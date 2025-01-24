@@ -8,6 +8,7 @@ dict_modalidade_saque = {
     'Parcelado':'2',
 }
 
+load_dotenv()
 
 def consulta_saque_complementar_bmg(retorno_login,dict_infos):
     login = os.getenv("LOGIN")

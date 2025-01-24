@@ -565,7 +565,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "dict_modalidade_saque = {\n    'Parcelado':'2',\n}\ndef consulta_saque_complementar_bmg(retorno_login,dict_infos):\n    login = os.getenv(\"LOGIN\")\n    senha = os.getenv(\"SENHA\")\n    if dict_infos.get(\"id_consulta_massa\") and not dict_infos.get('leads_saque'):\n        print('aguardando consulta em massa BMG')\n        time.sleep(randint(10,30))\n    cartoes = []",
+        "peekOfCode": "dict_modalidade_saque = {\n    'Parcelado':'2',\n}\nload_dotenv()\ndef consulta_saque_complementar_bmg(retorno_login,dict_infos):\n    login = os.getenv(\"LOGIN\")\n    senha = os.getenv(\"SENHA\")\n    if dict_infos.get(\"id_consulta_massa\") and not dict_infos.get('leads_saque'):\n        print('aguardando consulta em massa BMG')\n        time.sleep(randint(10,30))",
         "detail": "main",
         "documentation": {}
     },
