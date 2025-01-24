@@ -288,7 +288,7 @@ def login_api_bmg(usuario_id,nome_thread):
 
 def digitacao_bmg_api(retorno_login,dict_infos):
     simulacao = simular_saque_parcelado_bmg(retorno_login,dict_infos)
-    
+    print(simulacao)
     login = 'ROBO.56306'
     senha = r'irWY!kQD@6%rb'
     
