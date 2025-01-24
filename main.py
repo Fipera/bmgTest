@@ -453,29 +453,10 @@ def digitacao_bmg(retorno_login, dict_infos):
 
     response = requests.post(url, data=soap_envelope, headers=headers)
  
-    root = ET.fromstring(response.content)
+    dict = xmltodict.parse(response.content)
+    print(dict)
     
   
-    namespaces = {
-        'soapenv': 'http://schemas.xmlsoap.org/soap/envelope/',
-        'ns1': 'http://webservice.econsig.bmg.com',
-        'xsd': 'http://www.w3.org/2001/XMLSchema',
-        'xsi': 'http://www.w3.org/2001/XMLSchema-instance'
-    }
-    
-  
-    valor_saque_maximo_element = root.find(
-        './/ns1:buscarLimiteSaqueReturn/valorSaqueMaximo',
-        namespaces
-    )
-    
-  
-    if valor_saque_maximo_element is not None:
-        dict_infos['valor_saque'] = float(valor_saque_maximo_element.text)
-    else:
-        dict_infos['valor_saque'] = None 
-    
-    print(dict_infos['valor_saque'])
 
     # soap_envelope = fr'''
     # <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com">
