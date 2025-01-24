@@ -596,9 +596,9 @@ def simular_saque_parcelado_bmg(retorno_login,dict_infos):
 #     print(response.content)
 
 dict_infos = {
-    "cpf": "147045282",
-    "matricula": "1422811082",
-    "numero_conta_interna": 19585314,
+    "cpf": "217373208",
+    "matricula": "1422812631",
+    "numero_conta_interna": 17712697,
     
     "codigo_entidade" : 1581, # 1581 ou 4277
     "tipo_saque": 2,    #   1-SaqueAutorizado    2-Parcelado 
