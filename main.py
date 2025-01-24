@@ -360,10 +360,10 @@ def digitacao_bmg_api(retorno_login,dict_infos):
     print(dict)
     if 'soapenv:Fault' in dict['soapenv:Envelope']['soapenv:Body']:
         try:
-            msg_erro = dict['soapenv:Envelope']['soapenv:Body']['soapenv:Fault']['faultstring'].split('.ServiceException')[0]
-        except:
             msg_erro = dict['soapenv:Envelope']['soapenv:Body']['soapenv:Fault']['faultstring']
-        return {'sucesso':False,'msg_retorno':msg_erro,'obs':msg_erro}
+        except Exception as e:
+            msg_erro = f"Erro ao processar a mensagem: {str(e)}"
+        return {'sucesso': False, 'msg_retorno': msg_erro, 'obs': msg_erro}
     
     return {'sucesso':True,'numero_ade':dict['soapenv:Envelope']['soapenv:Body']['ns1:gravarPropostaSaqueComplementarResponse']['gravarPropostaSaqueComplementarReturn']['#text']}
     #codigo_entidade = 1581 ou 4277
