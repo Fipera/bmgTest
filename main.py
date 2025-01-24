@@ -452,7 +452,6 @@ def digitacao_bmg(retorno_login, dict_infos):
     }
 
     response = requests.post(url, data=soap_envelope, headers=headers)
- 
     response_dict = xmltodict.parse(response.content)
     try:
         valor_saque_maximo = float(
@@ -467,33 +466,31 @@ def digitacao_bmg(retorno_login, dict_infos):
     
   
 
-    # soap_envelope = fr'''
-    # <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com">
-    # <soapenv:Header/>
-    # <soapenv:Body>
-    #     <web:buscarSimulacao  soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-    #         <param xsi:type="web:SimulacaoCartaoParameter">
-    #             <login xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{login}</login>
-    #             <senha xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{senha}</senha>
-    #             <codigoEntidade xsi:type="xsd:int">{dict_infos["codigo_entidade"]}</codigoEntidade>
-    #             <cpf xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{dict_infos["cpf"]}</cpf>
-    #             <matricula xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{dict_infos["matricula"]}</matricula>
-    #             <numeroContaInterna xsi:type="xsd:long">{dict_infos["numero_conta_interna"]}</numeroContaInterna>
-    #             <tipoSaque xsi:type="xsd:int">{dict_infos["tipo_saque"]}</tipoSaque>
-    #         </param>
-    #     </web:buscarSimulacao >
-    # </soapenv:Body>
-    # </soapenv:Envelope>'''
+    soap_envelope = fr'''
+    <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <web:buscarSimulacao  soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+            <param xsi:type="web:SimulacaoCartaoParameter">
+                <login xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{login}</login>
+                <senha xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{senha}</senha>
+                <codigoEntidade xsi:type="xsd:int">{dict_infos["codigo_entidade"]}</codigoEntidade>
+                <valorSaque xsi:type="xsd:double">{dict_infos["valor_saque"]}</valorSaque>
+            </param>
+        </web:buscarSimulacao>
+    </soapenv:Body>
+    </soapenv:Envelope>'''
         
-    # headers = {
-    #     "Content-Type": "text/xml; charset=utf-8",
-    #     "Content-Length": str(len(soap_envelope)),
-    #     "SOAPAction": "http://webservice.econsig.bmg.com/buscarSimulacao ",
-    #     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
-    # }
+    headers = {
+        "Content-Type": "text/xml; charset=utf-8",
+        "Content-Length": str(len(soap_envelope)),
+        "SOAPAction": "http://webservice.econsig.bmg.com/buscarSimulacao ",
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
+    }
 
-    # response = requests.post(url, data=soap_envelope, headers=headers)
-    # print(response.content)
+    response = requests.post(url, data=soap_envelope, headers=headers)
+    response_dict = xmltodict.parse(response.content)
+    print(response_dict)
     return response
    
     soap = f'''<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservice.econsig.bmg.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
