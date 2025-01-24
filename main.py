@@ -453,8 +453,17 @@ def digitacao_bmg(retorno_login, dict_infos):
 
     response = requests.post(url, data=soap_envelope, headers=headers)
  
-    dict = xmltodict.parse(response.content)
-    print(dict)
+    response_dict = xmltodict.parse(response.content)
+    try:
+        valor_saque_maximo = float(
+            response_dict['soapenv:Envelope']['soapenv:Body']['ns1:buscarLimiteSaqueResponse']
+            ['buscarLimiteSaqueReturn']['valorSaqueMaximo']['#text']
+        )
+        dict_infos['valor_saque'] = valor_saque_maximo
+    except KeyError:
+        dict_infos['valor_saque'] = None 
+    
+    print(dict_infos['valor_saque'])
     
   
 
